@@ -49,7 +49,7 @@ int sync_hostapd_freq_param(unsigned int apIndex)
     wifi_radio_operationParam_t *radio_param;
     int freq;
     char country[8] = { 0 };
-
+wifi_hal_dbg_print("%s:%d ENTER\n",__func__, __LINE__);
     interface = get_interface_by_vap_index(apIndex);
     if (interface == NULL) {
         wifi_hal_error_print("%s:%d: interface for ap index:%u not found\n", __func__, __LINE__, apIndex);
@@ -57,10 +57,12 @@ int sync_hostapd_freq_param(unsigned int apIndex)
     }
     vap = &interface->vap_info;
     radio = get_radio_by_rdk_index(vap->radio_index);
+    wifi_hal_dbg_print("%s:%d before NULL check\n",__func__, __LINE__);
     if (radio == NULL) {
         wifi_hal_error_print("%s:%d radio is NULL for apIndex=%u\n", __func__, __LINE__, apIndex);
         return RETURN_ERR;
     }
+    wifi_hal_dbg_print("%s:%d after NULL check\n",__func__, __LINE__);
     radio_param = &radio->oper_param;
 
     get_coutry_str_from_code(radio_param->countryCode, country);
@@ -72,6 +74,7 @@ int sync_hostapd_freq_param(unsigned int apIndex)
     } else {
         wifi_hal_dbg_print("%s:%d: ap index:%u existing freq:%d curr freq:%d\n", __func__, __LINE__, apIndex, interface->u.ap.hapd.iface->freq, freq);
     }
+    wifi_hal_dbg_print("%s:%d EXIT\n",__func__, __LINE__);
     return RETURN_OK;
 }
 

@@ -348,19 +348,24 @@ int validate_radio_operation_param(wifi_radio_operationParam_t *param)
 int validate_radius_vap_security_param(wifi_vap_security_t *security, char *msg, int len)
 {
     int ret = RETURN_OK;
-
+wifi_hal_dbg_print("%s:%d ENTER\n",__func__, __LINE__);
     if ((strlen(security->u.radius.ip) == 0) || (security->u.radius.port == 0) ||
         (strlen(security->u.radius.key) == 0)) {
         ret = RETURN_ERR;
+	wifi_hal_dbg_print("%s:%d before snprintf for ip\n",__func__, __LINE__);
         snprintf(msg + strlen(msg), len - strlen(msg), " Failed to validate vap security params radius ip:%s port:%d\n",
                                 security->u.radius.ip, security->u.radius.port);
+	wifi_hal_dbg_print("%s:%d after snprintf for ip\n",__func__, __LINE__);
     }
     if ((strlen(security->u.radius.s_ip) == 0) || (security->u.radius.s_port == 0) ||
         (strlen(security->u.radius.s_key) == 0)) {
         ret = RETURN_ERR;
+        wifi_hal_dbg_print("%s:%d before snprintf for s_ip\n",__func__, __LINE__);
         snprintf(msg + strlen(msg), len - strlen(msg), " Failed to validate vap security params radius s_ip:%s s_port:%d\n",
                                 security->u.radius.s_ip, security->u.radius.s_port);
+	wifi_hal_dbg_print("%s:%d after snprintf for s_ip\n",__func__, __LINE__);
     }
+    wifi_hal_dbg_print("%s:%d EXIT\n",__func__, __LINE__);
     return ret;
 }
 

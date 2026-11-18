@@ -865,7 +865,7 @@ int platform_get_keypassphrase_default(char *password, int vap_index)
     int ret = 0;
     char param [DEFAULT_CMD_SIZE] = {0};
     char value[MAX_DEFAULT_VALUE_SIZE] = {0};
-
+wifi_hal_dbg_print("%s:%d ENTER\n",__func__, __LINE__);
     if(is_wifi_hal_vap_private(vap_index))
     {
         ret = read_from_factory_defaults(FACTORY_DEFAULTS_FILE, DEFAULT_WIFI_PASSWORD_KEY,
@@ -890,8 +890,10 @@ int platform_get_keypassphrase_default(char *password, int vap_index)
         qcacfg_nvram_get(param, password, WIFI_AP_MAX_PASSPHRASE_LEN);
         return 0;
     }
+    wifi_hal_dbg_print("%s:%d before password snprintf \n",__func__, __LINE__);
     snprintf(password, WIFI_AP_MAX_PASSPHRASE_LEN, "%s", value);
-
+    wifi_hal_dbg_print("%s:%d after password snprintf \n",__func__, __LINE__);
+wifi_hal_dbg_print("%s:%d EXIT\n",__func__, __LINE__);
     return 0;
 }
 
@@ -900,7 +902,7 @@ int platform_get_ssid_default(char *ssid, int vap_index)
     int ret = 0;
     char param [DEFAULT_CMD_SIZE] = {0};
     char value[MAX_DEFAULT_VALUE_SIZE] = {0};
-
+wifi_hal_dbg_print("%s:%d ENTER\n",__func__, __LINE__);
     if(is_wifi_hal_vap_private(vap_index))
     {
         ret = read_from_factory_defaults(FACTORY_DEFAULTS_FILE, DEFAULT_24G_SSID_KEY, value, sizeof(value));
@@ -923,8 +925,10 @@ int platform_get_ssid_default(char *ssid, int vap_index)
         qcacfg_nvram_get(param, ssid, WIFI_AP_MAX_SSID_LEN);
         return 0;
     }
+    wifi_hal_dbg_print("%s:%d before ssid snprintf\n",__func__, __LINE__);
     snprintf(ssid, WIFI_AP_MAX_SSID_LEN, "%s", value);
-
+    wifi_hal_dbg_print("%s:%d after ssid snprintf\n",__func__, __LINE__);
+wifi_hal_dbg_print("%s:%d EXIT\n",__func__, __LINE__);
     return 0;
 }
 
